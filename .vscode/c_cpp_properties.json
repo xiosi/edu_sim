@@ -1,0 +1,27 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "/home/xiosi/dockerros/teach/devel/include",
+                "/opt/ros/melodic/include",
+                "/home/xiosi/dockerros/teach/src/cv_camera/include",
+                "/home/xiosi/dockerros/teach/src/SVO/fast/include",
+                "/home/xiosi/dockerros/teach/src/SVO/rpg_svo/svo/include",
+                "/home/xiosi/dockerros/teach/src/SVO/rpg_svo/svo_ros/include",
+                "/home/xiosi/dockerros/teach/src/SVO/rpg_vikit/vikit_common/include",
+                "/home/xiosi/dockerros/teach/src/SVO/rpg_vikit/vikit_ros/include",
+                "/usr/include"
+            ],
+            "name": "Linux",
+            "intelliSenseMode": "linux-gcc-x64",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++14"
+        }
+    ],
+    "version": 4
+}
