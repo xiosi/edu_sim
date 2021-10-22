@@ -13,6 +13,10 @@ $ ls model.tar.g* | xargs -n1 tar xzvf
 killall gzserver
 killall gzclient
 ```
+也可能是需要更改server连接
+```
+sed  -i  's/fuel/robotics/g'  ~/.ignition/fuel/config.yaml
+```
 ![alt text](https://raw.githubusercontent.com/Pallav1299/Navigate_Multiple_Robots/master/thumbnail.png)
 
 How to navigate multiple robots in simulation using ROS and Gazebo.
