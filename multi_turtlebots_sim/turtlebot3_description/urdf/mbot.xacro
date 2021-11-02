@@ -9,7 +9,7 @@
     <!-- car length0.16，camera highth0.08 -->
     <!-- <xacro:property name="camera_offset_z" value="0.10" /> -->
     
-    <xacro:mbot_base/>
+    <!-- <xacro:mbot_base/> -->
    
    <!--neck link-->
    
