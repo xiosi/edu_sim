@@ -25,7 +25,8 @@
     <xacro:property name="caster_joint_x" value="0.14"/>
 
     <xacro:include filename="$(find multi_turtlebots_sim)/turtlebot3_description/urdf/mbot_base.gazebo.xacro"/>
-
+    <xacro:include filename="$(find multi_turtlebots_sim)/turtlebot3_description/urdf/mbot_camera.xacro"/>
+    <xacro:realsense/>
 <!-- Defining the colors used in this robot -->
     <material name="yellow">
         <color rgba="1 0.4 0 1"/>
@@ -140,5 +141,6 @@
     </xacro:macro>
 
 <xacro:mbot_base/>
+
     
 </robot>

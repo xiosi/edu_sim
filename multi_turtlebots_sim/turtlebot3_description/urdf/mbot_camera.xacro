@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="camera">
     <!--prefix:=camera camera--> 
-    <xacro:macro name="usb_camera" params="prefix:=camera">
-        <link name="${prefix}_link">
+    <xacro:macro name="realsense">
+        <!-- <link name="${prefix}_link">
             <visual>
                 <origin xyz=" 0 0 0 " rpy="0 0 0" />
                 <geometry>
@@ -10,7 +10,66 @@
                 </geometry>
                 <material name="black"/>
             </visual>
+        </link> -->
+          <!-- Camera -->
+        
+        <link name="camera_link">
+            <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.1 0.1 0.1"/>
+            </geometry>
+            </collision>
+            <visual>
+            <origin xyz="0 0 0" rpy="0 0 1.5708"/>
+            <geometry>
+                <!--<mesh filename="package://robot_sim_demo/models/meshes/xtion_pro_camera.dae" />-->
+                <mesh filename="package://multi_turtlebots_sim/turtlebot3_description/meshes/sensors/realsense.obj" />
+            </geometry>
+            </visual>
+            <inertial>
+            <mass value="1e-5" />
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+            </inertial>
         </link>
+
+        <joint name="camera_joint" type="fixed">
+            <axis xyz="0 0.5 0" />
+            <origin xyz="0 0 0.20" rpy="0 0 -1.5708"/>
+            <parent link="base_link"/>
+            <child link="camera_link"/>
+        </joint>
+
+        <!-- generate an optical frame http://www.ros.org/reps/rep-0103.html#suffix-frames
+            so that ros and opencv can operate on the camera frame correctly -->
+             <!-- these values have to be these values otherwise the gazebo camera image
+                won't be aligned properly with the frame it is supposedly originating from -->           
+        <joint name="camera_fake_joint" type="fixed">
+
+            <origin xyz="0 0 0" rpy="0 0 1.5708"/>
+            <parent link="camera_link"/>
+            <child link="camera_link_fake"/>
+        </joint>
+        <link name="camera_link_fake">
+        </link>
+        <joint name="camera_optical_joint" type="fixed">
+            <origin xyz="0 0 0" rpy="-1.5708 0 -1.5708"/>
+            <parent link="camera_link_fake"/>
+            <child link="camera_link_optical"/>
+        </joint>
+        <link name="camera_link_optical">
+        </link>
+        <link name="imu_link"/>
+        <joint name="base_to_imu" type="fixed">
+            <axis rpy="0 0 0" xyz="0 0 0"/>
+            <parent link="camera_link"/>
+            <child link="imu_link"/>
+            <origin rpy="0 0 0" xyz="0 0 .2"/>
+        </joint>
     </xacro:macro>
+    
+
+
 
 </robot>
