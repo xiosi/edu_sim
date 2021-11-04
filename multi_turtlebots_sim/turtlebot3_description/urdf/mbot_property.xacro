@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="camera">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="property">
     <!--prefix:=camera camera--> 
     <xacro:macro name="realsense">
         <!-- <link name="${prefix}_link">
@@ -36,7 +36,7 @@
 
         <joint name="camera_joint" type="fixed">
             <axis xyz="0 0.5 0" />
-            <origin xyz="0 0 0.20" rpy="0 0 -1.5708"/>
+            <origin xyz="0 0 0.250" rpy="0 0 -1.5708"/>
             <parent link="base_link"/>
             <child link="camera_link"/>
         </joint>
@@ -68,6 +68,48 @@
             <origin rpy="0 0 0" xyz="0 0 .2"/>
         </joint>
     </xacro:macro>
+    <xacro:macro name="rplidarA2" params="name ros_topic">
+    <xacro:sick_tim name="${name}" ros_topic="${ros_topic}"
+      length="0.06" width="0.06" height="0.079" mass="0.150" z_offset="0.33"
+      min_range="0.2" max_range="8.0"
+      mesh="package://multi_turtlebots_sim/turtlebot3_description/meshes/sensors/rplidar.dae" />
+    </xacro:macro>
+
+    <xacro:macro name="sick_tim" params="name ros_topic length width height mass z_offset min_range max_range mesh">
+    <!-- z_offset: distance between base plate and laser center (= center of mesh) -->
+
+    <joint name="${name}_joint" type="fixed">
+      <parent link="base_link" />
+      <child link="${name}" />
+      <origin rpy="0 0 0" xyz="0 0 ${z_offset}"/>
+    </joint>
+
+    <link name="${name}">
+      <visual>
+        <geometry>
+          <mesh filename="${mesh}" />
+        </geometry>
+        <material name="lightblue">
+          <color rgba=".5 .5 .7 .8" />
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="${mesh}" />
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="${mass}" />
+        <origin xyz="0 0 -0.026" />
+        <inertia ixx="${0.0833333 * mass * (width * width + height * height)}" ixy="0.0" ixz="0.0"
+          iyy="${0.0833333 * mass * (length * length + height * height)}" iyz="0.0"
+          izz="${0.0833333 * mass * (length * length + width * width)}" />
+      </inertial>
+    </link>
+    
+    <!--update_rate=15.0-->
+    </xacro:macro>
+
     
 
 

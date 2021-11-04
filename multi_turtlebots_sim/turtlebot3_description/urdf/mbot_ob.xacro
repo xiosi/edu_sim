@@ -1,11 +1,9 @@
 <?xml version="1.0"?>
-<robot name="arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
-
+<robot name="ob" xmlns:xacro="http://www.ros.org/wiki/xacro">
     <xacro:include filename="$(find multi_turtlebots_sim)/turtlebot3_description/urdf/mbot_base.xacro" />
     <xacro:include filename="$(find multi_turtlebots_sim)/turtlebot3_description/urdf/mbot_base.gazebo.xacro"/>
     <xacro:include filename="$(find multi_turtlebots_sim)/turtlebot3_description/urdf/mbot_property.xacro"/>
     <xacro:realsense/>
     <xacro:mbot_base/>
-    
-
+    <xacro:rplidarA2 name="lidar_link" ros_topic="scan" />
 </robot>
